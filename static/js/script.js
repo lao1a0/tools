@@ -207,6 +207,33 @@ document.addEventListener('DOMContentLoaded', function() {
             },
             unformatRawRule: function() {
                 this.unformatRule();
+            },
+            hexEncodeInput: function() {
+                this.hexEncode();
+            },
+            hexToStrInput: function() {
+                this.hexToStr();
+            },
+            toUnicodeInput: function() {
+                this.toUnicode();
+            },
+            fromUnicodeInput: function() {
+                this.fromUnicode();
+            },
+            encodeToHexInput: function() {
+                this.encodeToHex();
+            },
+            encodeToHexFlag: function() {
+                this.encodeToHex();
+            },
+            countTimeInput: function() {
+                this.countTime();
+            },
+            countSubTimeInput1: function() {
+                this.countSubTime();
+            },
+            countSubTimeInput2: function() {
+                this.countSubTime();
             }
         },
         mounted: function() {

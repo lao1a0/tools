@@ -60,10 +60,9 @@
                     <textarea id="hex-encode-input" v-model="hexEncodeInput" rows="1" cols="50" placeholder="Get_Verify_Info(hex_md5(user_string))" ></textarea>
                 </div>
                 <div class="output-box">
-                    <label for="hex-encode-result">编码结果:</label>
-                    <textarea id="hex-encode-result" v-model="hexEncodeResult" rows="1" cols="50" readonly></textarea>
+                    <label for="hex-encode-result">输出结果:</label>
+                    <textarea id="hex-encode-result" v-model="hexEncodeResult" rows="1" cols="50" placeholder="Get_Verify_Info\x28hex_md5\x28user_string\x29\x29" readonly></textarea>
                 </div>
-                <button @click="hexEncode">编码</button>
             </div>
 
             <div id="hextostr-section" class="card">
@@ -74,9 +73,8 @@
                 </div>
                 <div class="output-box">
                     <label for="hex-to-str-result">转换结果:</label>
-                    <textarea id="hex-to-str-result" v-model="hexToStrResult" rows="1" cols="50" readonly></textarea>
+                    <textarea id="hex-to-str-result" v-model="hexToStrResult" rows="1" placeholder="\u4e0d\u6b63\u786e" cols="50" readonly></textarea>
                 </div>
-                <button @click="hexToStr">转换</button>
             </div>
 
             <div id="tounicode-section" class="card">
@@ -89,7 +87,6 @@
                     <label for="to-unicode-result">转换结果:</label>
                     <textarea id="to-unicode-result" v-model="toUnicodeResult" placeholder="\\u0063\\u006f\\u006e\\u0064|\\u0069\\u0073" rows="1" cols="50" readonly></textarea>
                 </div>
-                <button @click="toUnicode">转换</button>
             </div>
 
             <div id="fromunicode-section" class="card">
@@ -102,7 +99,6 @@
                     <label for="from-unicode-result">转换结果:</label>
                     <textarea id="from-unicode-result" v-model="fromUnicodeResult" placeholder="cond|is" rows="1" cols="50" readonly></textarea>
                 </div>
-                <button @click="fromUnicode">转换</button>
             </div>
 
             <div id="encode_to_hex-section" class="card">
@@ -112,17 +108,18 @@
                     <textarea id="encode-to-hex-input" v-model="encodeToHexInput" rows="1" cols="50" placeholder="{[&quot;]+&quot;public&quot;" ></textarea>
                 </div>
                 <div class="output-box">
-                    <label for="encode-to-hex-result">编码结果:</label>
+                    <label for="encode-to-hex-result">输出结果:</label>
                     <textarea id="encode-to-hex-result" v-model="encodeToHexResult" placeholder="\x7b[\x22]\x2b\x22public\x22" rows="1" cols="50" readonly></textarea>
                 </div>
                 <div class="input-box">
                     <label for="encode-to-hex-flag">编码标志:</label>
-                    <select id="encode-to-hex-flag" v-model="encodeToHexFlag">
-                        <option value="e">编码</option>
-                        <option value="d">解码</option>
-                    </select>
+                    <div class="select-wrapper">
+                        <select id="encode-to-hex-flag" v-model="encodeToHexFlag" class="styled-select">
+                            <option value="e">编码</option>
+                            <option value="d">解码</option>
+                        </select>
+                    </div>
                 </div>
-                <button @click="encodeToHex">编码/解码</button>
             </div>
 
             <div id="counttime-section" class="card">
@@ -139,7 +136,6 @@
                     <label for="count-time-result">结果时间:</label>
                     <textarea id="count-time-result" v-model="countTimeResult" placeholder="09:42:28.756000" rows="1" cols="50" readonly></textarea>
                 </div>
-                <button @click="countTime">计算</button>
             </div>
 
             <div id="countsubtime-section" class="card">
@@ -156,7 +152,6 @@
                     <label for="count-sub-time-result">时间差:</label>
                     <textarea id="count-sub-time-result" v-model="countSubTimeResult" placeholder="0:00:09.628000" rows="1" cols="50" readonly></textarea>
                 </div>
-                <button @click="countSubTime">计算</button>
             </div>
         </div>
     </div>
