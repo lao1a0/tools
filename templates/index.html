@@ -26,6 +26,8 @@
                 <li><a href="#encode_to_hex-section" onclick="scrollToSection('encode_to_hex-section')">编码到Hex</a></li>
                 <li><a href="#counttime-section" onclick="scrollToSection('counttime-section')">计算时间</a></li>
                 <li><a href="#countsubtime-section" onclick="scrollToSection('countsubtime-section')">计算时间差</a></li>
+                <li><a href="#google-search-section" onclick="scrollToSection('google-search-section')">Google搜索</a></li>
+        
             </ul>
         </aside>
         <div id="app" class="content">
@@ -76,28 +78,25 @@
                     <textarea id="hex-to-str-result" v-model="hexToStrResult" rows="1" placeholder="\u4e0d\u6b63\u786e" cols="50" readonly></textarea>
                 </div>
             </div>
-
+            
             <div id="tounicode-section" class="card">
-                <h2>转Unicode</h2>
+                <h2>Unicode编码/解码</h2>
                 <div class="input-box">
-                    <label for="to-unicode-input">输入字符串:</label>
-                    <textarea id="to-unicode-input" v-model="toUnicodeInput" rows="1" cols="50" placeholder="cond|is" ></textarea>
+                    <label for="unicode-input">输入字符串:</label>
+                    <textarea id="unicode-input" v-model="unicodeInput" rows="1" cols="50" placeholder="cond|is"></textarea>
                 </div>
                 <div class="output-box">
-                    <label for="to-unicode-result">转换结果:</label>
-                    <textarea id="to-unicode-result" v-model="toUnicodeResult" placeholder="\\u0063\\u006f\\u006e\\u0064|\\u0069\\u0073" rows="1" cols="50" readonly></textarea>
+                    <label for="unicode-result">输出结果:</label>
+                    <textarea id="unicode-result" v-model="unicodeResult" rows="1" cols="50" readonly></textarea>
                 </div>
-            </div>
-
-            <div id="fromunicode-section" class="card">
-                <h2>从Unicode转回</h2>
                 <div class="input-box">
-                    <label for="from-unicode-input">输入Unicode字符串:</label>
-                    <textarea id="from-unicode-input" v-model="fromUnicodeInput" rows="1" cols="50" placeholder="\\u0063\\u006f\\u006e\\u0064|\\u0069\\u0073" ></textarea>
-                </div>
-                <div class="output-box">
-                    <label for="from-unicode-result">转换结果:</label>
-                    <textarea id="from-unicode-result" v-model="fromUnicodeResult" placeholder="cond|is" rows="1" cols="50" readonly></textarea>
+                    <label for="unicode-flag">编码标志:</label>
+                    <div class="select-wrapper">
+                        <select id="unicode-flag" v-model="unicodeFlag" class="styled-select">
+                            <option value="encode">编码</option>
+                            <option value="decode">解码</option>
+                        </select>
+                    </div>
                 </div>
             </div>
 
@@ -151,6 +150,29 @@
                 <div class="output-box">
                     <label for="count-sub-time-result">时间差:</label>
                     <textarea id="count-sub-time-result" v-model="countSubTimeResult" placeholder="0:00:09.628000" rows="1" cols="50" readonly></textarea>
+                </div>
+            </div>
+
+            <div id="google-search-section" class="card">
+                <h2>Google 搜索</h2>
+                <div class="input-box">
+                    <label for="google-query">查询词:</label>
+                    <textarea id="google-query" v-model="googleQuery" rows="1" cols="50" placeholder="请输入查询词"></textarea>
+                </div>
+                <div class="input-box">
+                    <label for="google-site-filters">限定词:</label>
+                    <!-- <select id="google-site-filters" v-model="googleSiteFilters" multiple>
+                        <option value="site:wy.zone.ci">site:wy.zone.ci</option>
+                        <option value="site:wooyun.2xss.cc">site:wooyun.2xss.cc</option>
+                        <option value="site:wooyun.kieran.top">site:wooyun.kieran.top</option>
+                        <option value="site:vip.bdziyi.com">site:vip.bdziyi.com</option>
+                    </select> -->
+                    <textarea id="google-site-filters" v-model="googleSiteFilters" rows="1" cols="50" placeholder="请输入限定词，例如：site:wy.zone.ci | site:wooyun.2xss.cc" >site:wy.zone.ci | site:wooyun.2xss.cc | site:wooyun.kieran.top |site:vip.bdziyi.com |site:hackingthe.cloud | site:www.tidesec.com | site:tttang.com | site:xz.aliyun.com | site:www.ddosi.org | site:www.t00ls.com | site:w8ay.fun | site:*.ywhack.com | site:forum.butian.net</textarea>
+                </div>
+                <button @click="googleSearch">搜索</button>
+                <div class="output-box" v-if="googleSearchResult">
+                    <label for="google-search-result">搜索结果:</label>
+                    <p id="google-search-result"><a :href="googleSearchResult" target="_blank">{{ googleSearchResult }}</a></p>
                 </div>
             </div>
         </div>

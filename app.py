@@ -74,5 +74,14 @@ def count_sub_time():
     result = countSubTime(time_str1, time_str2)
     return jsonify({'result': result.strip()})
 
+@app.route('/api/google_search', methods=['POST'])
+def google_search():
+    data = request.get_json()
+    query = data['query']
+    site_filters = data['site_filters']
+    search_query = f"{query} {site_filters}"
+    google_search_url = f"https://www.google.com/search?q={search_query}"
+    return jsonify({'search_url': google_search_url})
+
 if __name__ == '__main__':
     app.run(host="0.0.0.0",port=5000,debug=True)

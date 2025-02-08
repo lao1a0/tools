@@ -10,10 +10,9 @@ document.addEventListener('DOMContentLoaded', function() {
             hexEncodeResult: '',
             hexToStrInput: '',
             hexToStrResult: '',
-            toUnicodeInput: '',
-            toUnicodeResult: '',
-            fromUnicodeInput: '',
-            fromUnicodeResult: '',
+            unicodeInput: '',
+            unicodeResult: '',
+            unicodeFlag: 'encode',
             encodeToHexInput: '',
             encodeToHexResult: '',
             encodeToHexFlag: 'e',
@@ -22,7 +21,10 @@ document.addEventListener('DOMContentLoaded', function() {
             countTimeSeconds: 60,
             countSubTimeInput1: '',
             countSubTimeInput2: '',
-            countSubTimeResult: ''
+            countSubTimeResult: '',
+            googleQuery: '',
+            googleSiteFilters: '',
+            googleSearchResult: ''
         },
         methods: {
             hexEncode: function() {
@@ -61,9 +63,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     alert('Hex转字符串请求失败，请检查输入或联系管理员。');
                 });
             },
-            toUnicode: function() {
-                const rawString = this.toUnicodeInput;
-                fetch('/api/tounicode', {
+            unicodeEncodeDecode: function() {
+                const rawString = this.unicodeInput;
+                const flag = this.unicodeFlag;
+                const url = flag === 'encode' ? '/api/tounicode' : '/api/fromunicode';
+                fetch(url, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -72,29 +76,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 })
                 .then(response => response.json())
                 .then(data => {
-                    this.toUnicodeResult = data.result;
+                    this.unicodeResult = data.result;
                 })
                 .catch(error => {
-                    console.error('转Unicode请求失败:', error);
-                    alert('转Unicode请求失败，请检查输入或联系管理员。');
-                });
-            },
-            fromUnicode: function() {
-                const rawString = this.fromUnicodeInput;
-                fetch('/api/fromunicode', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ raw_string: rawString })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    this.fromUnicodeResult = data.result;
-                })
-                .catch(error => {
-                    console.error('从Unicode转回请求失败:', error);
-                    alert('从Unicode转回请求失败，请检查输入或联系管理员。');
+                    console.error('Unicode编码/解码请求失败:', error);
+                    alert('Unicode编码/解码请求失败，请检查输入或联系管理员。');
                 });
             },
             encodeToHex: function() {
@@ -152,6 +138,25 @@ document.addEventListener('DOMContentLoaded', function() {
                 .catch(error => {
                     console.error('计算时间差请求失败:', error);
                     alert('计算时间差请求失败，请检查输入或联系管理员。');
+                });
+            },
+            googleSearch: function() {
+                const query = this.googleQuery;
+                const siteFilters = this.googleSiteFilters;
+                fetch('/api/google_search', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ query: query, site_filters: siteFilters })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    this.googleSearchResult = data.search_url;
+                })
+                .catch(error => {
+                    console.error('Google搜索请求失败:', error);
+                    alert('Google搜索请求失败，请检查输入或联系管理员。');
                 });
             },
             formatRule: function() {
@@ -214,11 +219,11 @@ document.addEventListener('DOMContentLoaded', function() {
             hexToStrInput: function() {
                 this.hexToStr();
             },
-            toUnicodeInput: function() {
-                this.toUnicode();
+            unicodeInput: function() {
+                this.unicodeEncodeDecode();
             },
-            fromUnicodeInput: function() {
-                this.fromUnicode();
+            unicodeFlag: function() {
+                this.unicodeEncodeDecode();
             },
             encodeToHexInput: function() {
                 this.encodeToHex();
